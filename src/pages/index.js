@@ -7,11 +7,15 @@ import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 
 class BlogIndex extends React.Component {
+  getTags() {
+    const posts =  this.props.data.allMarkdownRemark.edges
+    const allTags = posts.map(i => i.frontmatter.tags).flatten();
+  }
+
   render() {
     const { data } = this.props
     const siteTitle = data.site.siteMetadata.title
     const posts = data.allMarkdownRemark.edges
-
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="All posts" />
@@ -30,7 +34,15 @@ class BlogIndex extends React.Component {
                     {title}
                   </Link>
                 </h3>
-                <small>{node.frontmatter.date}</small>
+                <p
+                  style={{
+                    display: `flex`,
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <small>{node.frontmatter.date}</small>
+                  <small>{node.frontmatter.tags}</small>
+                </p>
               </header>
               <section>
                 <p
@@ -67,6 +79,7 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             title
             description
+            tags
           }
         }
       }

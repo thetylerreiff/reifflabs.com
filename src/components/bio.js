@@ -54,8 +54,8 @@ const Bio = () => {
         }}
       />
       <p>
-        Written by <strong>{author}</strong> who lives and works in Connecticut
-         building things with the web.
+        Written by <strong>{author}</strong> who lives and works in New England
+         building things with the web. I also love good eats.
         {` `}
         <a href={`https://twitter.com/${social.twitter}`}>
           You should follow him on Twitter

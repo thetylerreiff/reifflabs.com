@@ -2,6 +2,7 @@
 title: Hello World
 date: "2019-11-20T22:12:03.0000"
 description: "Hello World"
+tags: ["tech"]
 ---
 
 Ok, so in true 2019 fashion I'm making a tech blog. This is mainly an 
