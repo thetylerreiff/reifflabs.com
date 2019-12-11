@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
@@ -6,57 +6,90 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 
-class BlogIndex extends React.Component {
-  getTags() {
-    const posts =  this.props.data.allMarkdownRemark.edges
-    const allTags = posts.map(i => i.frontmatter.tags).flatten();
+function BlogIndex({ data , location }) {
+  const [tags, setTags] = useState([])
+  const [activeTag, setActiveTag] = useState(null)
+
+  // effect hook to set get all tags for the filter bar
+  useEffect(() => {
+    const posts = data.allMarkdownRemark.edges
+    const allTags = posts.map(({ node }) => node.frontmatter.tags).flat();
+    setTags(allTags)
+  },[])
+
+  function handleTagFilter(tag) {
+    if (activeTag && activeTag === tag) {
+      setActiveTag(null)
+    } else {
+      setActiveTag(tag)
+    }
   }
 
-  render() {
-    const { data } = this.props
-    const siteTitle = data.site.siteMetadata.title
-    const posts = data.allMarkdownRemark.edges
-    return (
-      <Layout location={this.props.location} title={siteTitle}>
-        <SEO title="All posts" />
-        <Bio />
-        {posts.map(({ node }) => {
-          const title = node.frontmatter.title || node.fields.slug
-          return (
-            <article key={node.fields.slug}>
-              <header>
-                <h3
-                  style={{
-                    marginBottom: rhythm(1 / 4),
-                  }}
-                >
-                  <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                    {title}
-                  </Link>
-                </h3>
-                <p
-                  style={{
-                    display: `flex`,
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <small>{node.frontmatter.date}</small>
-                  <small>{node.frontmatter.tags}</small>
-                </p>
-              </header>
-              <section>
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html: node.frontmatter.description || node.excerpt,
-                  }}
-                />
-              </section>
-            </article>
-          )
-        })}
-      </Layout>
-    )
-  }
+  const siteTitle = data.site.siteMetadata.title
+  const posts = data.allMarkdownRemark.edges
+  return (
+    <Layout location={location} title={siteTitle}>
+      <SEO title="All posts" />
+      <Bio />
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-around',
+        margin: '0 5rem',
+      }}>
+        {tags.map(i => (
+          <span key={i}>
+            <button
+              type="button"
+              onClick={() => handleTagFilter(i)}
+              style={{ 
+                background: 'none',
+                boxShadow: i===activeTag ? '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)': null,
+                fontSize: i===activeTag ? '1.1rem' : null
+              }}
+            >
+              {i}
+            </button>
+          </span>
+        ))}
+      </div>
+      {posts
+      .filter(({ node }) => activeTag ? node.frontmatter.tags.includes(activeTag) : true)
+      .map(({ node }) => {
+        const title = node.frontmatter.title || node.fields.slug
+        return (
+          <article key={node.fields.slug}>
+            <header>
+              <h3
+                style={{
+                  marginBottom: rhythm(1 / 4),
+                }}
+              >
+                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+                  {title}
+                </Link>
+              </h3>
+              <p
+                style={{
+                  display: `flex`,
+                  justifyContent: 'space-between',
+                }}
+              >
+                <small>{node.frontmatter.date}</small>
+                <small>{node.frontmatter.tags}</small>
+              </p>
+            </header>
+            <section>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: node.frontmatter.description || node.excerpt,
+                }}
+              />
+            </section>
+          </article>
+        )
+      })}
+    </Layout>
+  )
 }
 
 export default BlogIndex

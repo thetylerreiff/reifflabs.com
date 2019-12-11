@@ -57,7 +57,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Reifflabs`,
+        name: `reifflabs`,
         short_name: `reifflabs`,
         start_url: `/`,
         background_color: `#ffffff`,
