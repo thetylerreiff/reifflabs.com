@@ -15,7 +15,7 @@ function BlogIndex({ data , location }) {
     const posts = data.allMarkdownRemark.edges
     const allTags = posts.map(({ node }) => node.frontmatter.tags).flat();
     setTags(allTags)
-  },[])
+  },[data.allMarkdownRemark.edges])
 
   function handleTagFilter(tag) {
     if (activeTag && activeTag === tag) {
@@ -43,8 +43,8 @@ function BlogIndex({ data , location }) {
               onClick={() => handleTagFilter(i)}
               style={{ 
                 background: 'none',
-                boxShadow: i===activeTag ? '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)': null,
-                fontSize: i===activeTag ? '1.1rem' : null
+                boxShadow: i===activeTag ? '0 2px 3px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24)': null,
+                fontWeight: i===activeTag ? 700 : null
               }}
             >
               {i}
