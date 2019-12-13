@@ -1,4 +1,4 @@
-# reifflabs.com website
+# reifflabs.com [![Netlify Status](https://api.netlify.com/api/v1/badges/b3eb3bdb-9166-4be8-9fd0-3a0d91c9864b/deploy-status)](https://app.netlify.com/sites/reifflabs/deploys)
 This is the source code for reifflabs.com
 
 ## Scritps available
