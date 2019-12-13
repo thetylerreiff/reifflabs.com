@@ -44,7 +44,9 @@ function BlogIndex({ data , location }) {
               style={{ 
                 background: 'none',
                 boxShadow: i===activeTag ? '0 2px 3px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24)': null,
-                fontWeight: i===activeTag ? 700 : null
+                fontWeight: i===activeTag ? 700 : null,
+                fontSize: i===activeTag ? '1.25rem' : null,
+                transition: 'font-size 0.33s'
               }}
             >
               {i}
