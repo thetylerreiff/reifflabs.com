@@ -46,6 +46,6 @@ Enjoy on a salad, as a side dish, or anyway you please.
 
 ---
 
-*If you want to see more, [follow my Instagram](https://www.instagram.com/tjrcooks/)* 
+*If you want to see more, [follow my Instagram](https://www.instagram.com/mixedbageats/)* 
 
 ![chicken soup with potatoes and dill](soup.jpg)
