@@ -15,7 +15,7 @@ export default function Home() {
         <div>
           <Title>Big things are coming soon</Title>
           <Text>
-            <b>ReiffLabs</b> a technology company.
+            <b>ReiffLabs</b>, a technology company.
           </Text>
         </div>
       </main>
