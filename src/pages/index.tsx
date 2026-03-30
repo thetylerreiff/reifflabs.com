@@ -13,7 +13,7 @@ export default function Home() {
         style={{ placeItems: "center", height: "100vh" }}
       >
         <div>
-          <Title>Big things are coming soon</Title>
+          <Title>Big things are coming soon!</Title>
           <Text>
             <b>ReiffLabs</b>, a creative tech lab.
           </Text>
